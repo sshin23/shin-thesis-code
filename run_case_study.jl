@@ -65,14 +65,14 @@ for (name,compute_vals,perturb,N,K,NS,j,tol,omega,omegas,rho,rhos,etabs,etablabe
         vals./= maximum(vals)
         pyplot()
         plt = plot_graph(m_ref[:g],m_ref[:pos],vals,j)
-        savefig(plt,"../fig/$name-graph-$eta-$b.pdf")
+        savefig(plt,"$name-graph-$eta-$b.pdf")
         gr()
 
         dist = gdistances(m_ref[:g],j)
         push!(outputs,vals)
     end
     plt = plot_eds(dist,outputs,"(\\eta,b)",etabs_eds_labels)
-    savefig(plt,"../fig/$name-eds.pdf")
+    savefig(plt,"$name-eds.pdf")
 
     # effect of conditioning
     println("** effect of conditioning")
@@ -84,8 +84,8 @@ for (name,compute_vals,perturb,N,K,NS,j,tol,omega,omegas,rho,rhos,etabs,etablabe
         push!(outputs,m_schwarz[:output])
     end
     plt1, plt2 =plot_err_profile(outputs,"(\\eta,b)",etablabels)
-    savefig(plt1,"../fig/$name-etab.pdf")
-    savefig(plt2,"../fig/$name-etab-t.pdf")
+    savefig(plt1,"$name-etab.pdf")
+    savefig(plt2,"$name-etab-t.pdf")
 
     # effect of overlap
     println("** effect of overlap")
@@ -98,8 +98,8 @@ for (name,compute_vals,perturb,N,K,NS,j,tol,omega,omegas,rho,rhos,etabs,etablabe
     end
 
     plt1, plt2 =plot_err_profile(outputs,"\\widetilde{\\omega}",omegas)
-    savefig(plt1,"../fig/$name-overlap.pdf")
-    savefig(plt2,"../fig/$name-overlap-t.pdf")
+    savefig(plt1,"$name-overlap.pdf")
+    savefig(plt2,"$name-overlap-t.pdf")
     
     # effect of penalty
     println("** effect of penalty")
@@ -112,8 +112,8 @@ for (name,compute_vals,perturb,N,K,NS,j,tol,omega,omegas,rho,rhos,etabs,etablabe
     end
 
     plt1, plt2 =plot_err_profile(outputs,"\\mu",rhos)
-    savefig(plt1,"../fig/$name-penalty.pdf")
-    savefig(plt2,"../fig/$name-penalty-t.pdf")
+    savefig(plt1,"$name-penalty.pdf")
+    savefig(plt2,"$name-penalty-t.pdf")
     
     # benchmark
     println("** benchmark against ADMM and Ipopt")
@@ -139,6 +139,6 @@ for (name,compute_vals,perturb,N,K,NS,j,tol,omega,omegas,rho,rhos,etabs,etablabe
     GC.enable(true); GC.gc()
 
     plt1,plt2 = plot_benchmark(err_ref,time_ref,m_schwarz[:output],m_admm[:output])
-    savefig(plt1,"../fig/$name-benchmark.pdf")
-    savefig(plt2,"../fig/$name-benchmark-t.pdf")
+    savefig(plt1,"$name-benchmark.pdf")
+    savefig(plt2,"$name-benchmark-t.pdf")
 end
